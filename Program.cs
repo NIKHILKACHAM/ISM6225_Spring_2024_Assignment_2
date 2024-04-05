@@ -99,7 +99,7 @@ namespace ISM6225_Spring_2024_Assignment_2
 
                 int uniqueIndex = 1;
                 int nextUniqueIndex = 1;
-
+                 //removing duplicates
                 for (int currentIndex = 1; currentIndex < nums.Length; currentIndex++)
                 {
                     if (nums[currentIndex] != nums[currentIndex - 1])
@@ -153,7 +153,7 @@ namespace ISM6225_Spring_2024_Assignment_2
                     if (nums[nonZeroPtr] != 0)
                     {
                         int temp = nums[nonZeroPtr];
-                        nums[nonZeroPtr] = nums[zeroPtr];
+                        nums[nonZeroPtr] = nums[zeroPtr];//moving zeroes
                         nums[zeroPtr] = temp;
                         zeroPtr++;
                     }
@@ -297,7 +297,7 @@ namespace ISM6225_Spring_2024_Assignment_2
                     if (num == 1)
                     {
                         currentConsecutiveOnes++;
-                        maxConsecutiveOnes = Math.Max(maxConsecutiveOnes, currentConsecutiveOnes);
+                        maxConsecutiveOnes = Math.Max(maxConsecutiveOnes, currentConsecutiveOnes);//finding max consecutives
                     }
                     else
                     {
@@ -348,7 +348,7 @@ namespace ISM6225_Spring_2024_Assignment_2
                 {
                     int digit = binary % 10;
                     binary /= 10;
-                    decimalNumber += digit * (int)Math.Pow(2, position);
+                    decimalNumber += digit * (int)Math.Pow(2, position);//converting to decimal
                     position++;
                 }
 
@@ -391,12 +391,12 @@ namespace ISM6225_Spring_2024_Assignment_2
             {
                 if (nums.Length < 2)
                     return 0;
-
+                 //sorting array
                 Array.Sort(nums);
                 int maxDifference = 0;
                 for (int i = 1; i < nums.Length; i++)
                 {
-                    maxDifference = Math.Max(maxDifference, nums[i] - nums[i - 1]);
+                    maxDifference = Math.Max(maxDifference, nums[i] - nums[i - 1]);//finding max gap
                 }
 
                 return maxDifference;
@@ -438,6 +438,7 @@ namespace ISM6225_Spring_2024_Assignment_2
         {
             try
             {
+                //sorting array
                 Array.Sort(nums);
 
                 for (int i = nums.Length - 3; i >= 0; i--)
@@ -502,7 +503,7 @@ namespace ISM6225_Spring_2024_Assignment_2
                 int index;
                 while ((index = s.IndexOf(part)) != -1)
                 {
-                    s = s.Remove(index, part.Length);
+                    s = s.Remove(index, part.Length);//removing occurance
                 }
                 return s;
             }

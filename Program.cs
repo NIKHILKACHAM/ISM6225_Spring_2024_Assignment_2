@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -43,13 +43,13 @@ namespace ISM6225_Spring_2024_Assignment_2
 
             //Question 6:
             Console.WriteLine("Question 6:");
-            int[] nums5 = { 3, 6, 9, 1 };
+            int[] nums5 = { 3,6,9,1 };
             int maxGap = MaximumGap(nums5);
             Console.WriteLine(maxGap);
 
             //Question 7:
             Console.WriteLine("Question 7:");
-            int[] nums6 = { 2, 1, 2 };
+            int[] nums6 = { 2,1,2 };
             int largestPerimeterResult = LargestPerimeter(nums6);
             Console.WriteLine(largestPerimeterResult);
 
@@ -60,7 +60,7 @@ namespace ISM6225_Spring_2024_Assignment_2
         }
 
         /*
-
+        
         Question 1:
         Given an integer array nums sorted in non-decreasing order, remove the duplicates in-place such that each unique element appears only once. The relative order of the elements should be kept the same. Then return the number of unique elements in nums.
 
@@ -81,7 +81,7 @@ namespace ISM6225_Spring_2024_Assignment_2
         Output: 5, nums = [0,1,2,3,4,_,_,_,_,_]
         Explanation: Your function should return k = 5, with the first five elements of nums being 0, 1, 2, 3, and 4 respectively.
         It does not matter what you leave beyond the returned k (hence they are underscores).
-
+ 
 
         Constraints:
 
@@ -91,36 +91,36 @@ namespace ISM6225_Spring_2024_Assignment_2
         */
 
         public static int RemoveDuplicates(int[] nums)
+         {
+          try
+            {
+        if (nums == null || nums.Length == 0)
+            return 0;
+
+        int uniqueIndex = 1;
+        int nextUniqueIndex = 1;
+        
+        for (int currentIndex = 1; currentIndex < nums.Length; currentIndex++)
         {
-            try
+            if (nums[currentIndex] != nums[currentIndex - 1])
             {
-                if (nums == null || nums.Length == 0)
-                    return 0;
-
-                int uniqueIndex = 1;
-                int nextUniqueIndex = 1;
-                 //removing duplicates
-                for (int currentIndex = 1; currentIndex < nums.Length; currentIndex++)
-                {
-                    if (nums[currentIndex] != nums[currentIndex - 1])
-                    {
-                        nums[nextUniqueIndex] = nums[currentIndex];
-                        nextUniqueIndex++;
-                        uniqueIndex++;
-                    }
-                }
-
-                return uniqueIndex;
-            }
-            catch (Exception)
-            {
-                throw;
+                nums[nextUniqueIndex] = nums[currentIndex];
+                nextUniqueIndex++;
+                uniqueIndex++;
             }
         }
 
+        return uniqueIndex;
+    }
+    catch (Exception)
+    {
+        throw;
+    }
+}
+
 
         /*
-
+        
         Question 2:
         Given an integer array nums, move all 0's to the end of it while maintaining the relative order of the non-zero elements.
 
@@ -134,42 +134,41 @@ namespace ISM6225_Spring_2024_Assignment_2
 
         Input: nums = [0]
         Output: [0]
-
+ 
         Constraints:
 
         1 <= nums.length <= 104
         -231 <= nums[i] <= 231 - 1
         */
 
-        public static IList<int> MoveZeroes(int[] nums)
+             public static IList<int> MoveZeroes(int[] nums)
+    {
+        try
         {
-            try
+            List<int> result = new List<int>();
+
+            // Iterate through nums array
+            foreach (int num in nums)
             {
-                int nonZeroPtr = 0;
-                int zeroPtr = 0;
-
-                while (nonZeroPtr < nums.Length)
-                {
-                    if (nums[nonZeroPtr] != 0)
-                    {
-                        int temp = nums[nonZeroPtr];
-                        nums[nonZeroPtr] = nums[zeroPtr];//moving zeroes
-                        nums[zeroPtr] = temp;
-                        zeroPtr++;
-                    }
-
-                    nonZeroPtr++;
-                }
-
-                return nums;
-            }
-            catch (Exception)
-            {
-                throw;
+                // Add non-zero elements to result list
+                if (num != 0)
+                    result.Add(num);
             }
 
+            // Append zeroes to the end of the result list
+            int countZeroes = nums.Length - result.Count;
+            for (int i = 0; i < countZeroes; i++)
+            {
+                result.Add(0);
+            }
+
+            return result;
         }
-
+        catch (Exception)
+        {
+            throw;
+        }
+    }
         /*
 
         Question 3:
@@ -177,7 +176,7 @@ namespace ISM6225_Spring_2024_Assignment_2
 
         Notice that the solution set must not contain duplicate triplets.
 
-
+ 
 
         Example 1:
 
@@ -199,7 +198,7 @@ namespace ISM6225_Spring_2024_Assignment_2
         Input: nums = [0,0,0]
         Output: [[0,0,0]]
         Explanation: The only possible triplet sums up to 0.
-
+ 
 
         Constraints:
 
@@ -209,58 +208,58 @@ namespace ISM6225_Spring_2024_Assignment_2
         */
 
         public static IList<IList<int>> ThreeSum(int[] nums)
+{
+    try
+    {
+        List<IList<int>> result = new List<IList<int>>();
+
+        // Sort the array
+        Array.Sort(nums);
+
+        for (int i = 0; i < nums.Length - 2; i++)
         {
-            try
+            // Skip duplicates
+            if (i > 0 && nums[i] == nums[i - 1])
+                continue;
+
+            int left = i + 1;
+            int right = nums.Length - 1;
+
+            while (left < right)
             {
-                List<IList<int>> result = new List<IList<int>>();
-
-                // Sort the array
-                Array.Sort(nums);
-
-                for (int i = 0; i < nums.Length - 2; i++)
+                int sum = nums[i] + nums[left] + nums[right];
+                
+                if (sum == 0)
                 {
+                    result.Add(new List<int> { nums[i], nums[left], nums[right] });
+
                     // Skip duplicates
-                    if (i > 0 && nums[i] == nums[i - 1])
-                        continue;
+                    while (left < right && nums[left] == nums[left + 1])
+                        left++;
+                    while (left < right && nums[right] == nums[right - 1])
+                        right--;
 
-                    int left = i + 1;
-                    int right = nums.Length - 1;
-
-                    while (left < right)
-                    {
-                        int sum = nums[i] + nums[left] + nums[right];
-
-                        if (sum == 0)
-                        {
-                            result.Add(new List<int> { nums[i], nums[left], nums[right] });
-
-                            // Skip duplicates
-                            while (left < right && nums[left] == nums[left + 1])
-                                left++;
-                            while (left < right && nums[right] == nums[right - 1])
-                                right--;
-
-                            left++;
-                            right--;
-                        }
-                        else if (sum < 0)
-                        {
-                            left++;
-                        }
-                        else // sum > 0
-                        {
-                            right--;
-                        }
-                    }
+                    left++;
+                    right--;
                 }
-
-                return result;
-            }
-            catch (Exception)
-            {
-                throw;
+                else if (sum < 0)
+                {
+                    left++;
+                }
+                else // sum > 0
+                {
+                    right--;
+                }
             }
         }
+
+        return result;
+    }
+    catch (Exception)
+    {
+        throw;
+    }
+}
 
 
         /*
@@ -277,7 +276,7 @@ namespace ISM6225_Spring_2024_Assignment_2
 
         Input: nums = [1,0,1,1,0,1]
         Output: 2
-
+ 
         Constraints:
 
         1 <= nums.length <= 105
@@ -285,33 +284,33 @@ namespace ISM6225_Spring_2024_Assignment_2
 
         */
 
-        public static int FindMaxConsecutiveOnes(int[] nums)
+       public static int FindMaxConsecutiveOnes(int[] nums)
+{
+    try
+    {
+        int maxConsecutiveOnes = 0;
+        int currentConsecutiveOnes = 0;
+
+        foreach (int num in nums)
         {
-            try
+            if (num == 1)
             {
-                int maxConsecutiveOnes = 0;
-                int currentConsecutiveOnes = 0;
-
-                foreach (int num in nums)
-                {
-                    if (num == 1)
-                    {
-                        currentConsecutiveOnes++;
-                        maxConsecutiveOnes = Math.Max(maxConsecutiveOnes, currentConsecutiveOnes);//finding max consecutives
-                    }
-                    else
-                    {
-                        currentConsecutiveOnes = 0;
-                    }
-                }
-
-                return maxConsecutiveOnes;
+                currentConsecutiveOnes++;
+                maxConsecutiveOnes = Math.Max(maxConsecutiveOnes, currentConsecutiveOnes);
             }
-            catch (Exception)
+            else
             {
-                throw;
+                currentConsecutiveOnes = 0;
             }
         }
+
+        return maxConsecutiveOnes;
+    }
+    catch (Exception)
+    {
+        throw;
+    }
+}
 
 
         /*
@@ -337,28 +336,28 @@ namespace ISM6225_Spring_2024_Assignment_2
 
         */
 
-        public static int BinaryToDecimal(int binary)
+public static int BinaryToDecimal(int binary)
+{
+    try
+    {
+        int decimalNumber = 0;
+        int position = 0;
+
+        while (binary > 0)
         {
-            try
-            {
-                int decimalNumber = 0;
-                int position = 0;
-
-                while (binary > 0)
-                {
-                    int digit = binary % 10;
-                    binary /= 10;
-                    decimalNumber += digit * (int)Math.Pow(2, position);//converting to decimal
-                    position++;
-                }
-
-                return decimalNumber;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            int digit = binary % 10;
+            binary /= 10;
+            decimalNumber += digit * (int)Math.Pow(2, position);
+            position++;
         }
+
+        return decimalNumber;
+    }
+    catch (Exception)
+    {
+        throw;
+    }
+}
 
         /*
 
@@ -376,7 +375,7 @@ namespace ISM6225_Spring_2024_Assignment_2
         Input: nums = [10]
         Output: 0
         Explanation: The array contains less than 2 elements, therefore return 0.
-
+ 
 
         Constraints:
 
@@ -389,17 +388,17 @@ namespace ISM6225_Spring_2024_Assignment_2
         {
             try
             {
-                if (nums.Length < 2)
-                    return 0;
-                 //sorting array
-                Array.Sort(nums);
-                int maxDifference = 0;
-                for (int i = 1; i < nums.Length; i++)
-                {
-                    maxDifference = Math.Max(maxDifference, nums[i] - nums[i - 1]);//finding max gap
-                }
+        if (nums.Length < 2)
+            return 0;
 
-                return maxDifference;
+        Array.Sort(nums);
+        int maxDifference = 0;
+        for (int i = 1; i < nums.Length; i++)
+        {
+            maxDifference = Math.Max(maxDifference, nums[i] - nums[i - 1]);
+        }
+
+        return maxDifference;
             }
             catch (Exception)
             {
@@ -438,16 +437,15 @@ namespace ISM6225_Spring_2024_Assignment_2
         {
             try
             {
-                //sorting array
-                Array.Sort(nums);
+        Array.Sort(nums);
+        
+        for (int i = nums.Length - 3; i >= 0; i--)
+        {
+            if (nums[i] + nums[i + 1] > nums[i + 2])
+                return nums[i] + nums[i + 1] + nums[i + 2];
+        }
 
-                for (int i = nums.Length - 3; i >= 0; i--)
-                {
-                    if (nums[i] + nums[i + 1] > nums[i + 2])
-                        return nums[i] + nums[i + 1] + nums[i + 2];
-                }
-
-                return 0;
+        return 0;
             }
             catch (Exception)
             {
@@ -466,7 +464,7 @@ namespace ISM6225_Spring_2024_Assignment_2
 
         A substring is a contiguous sequence of characters in a string.
 
-
+ 
 
         Example 1:
 
@@ -500,12 +498,12 @@ namespace ISM6225_Spring_2024_Assignment_2
         {
             try
             {
-                int index;
-                while ((index = s.IndexOf(part)) != -1)
-                {
-                    s = s.Remove(index, part.Length);//removing occurance
-                }
-                return s;
+    int index;
+    while ((index = s.IndexOf(part)) != -1)
+    {
+        s = s.Remove(index, part.Length);
+    }
+    return s;
             }
             catch (Exception)
             {

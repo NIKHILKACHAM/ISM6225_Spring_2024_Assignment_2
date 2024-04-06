@@ -90,33 +90,43 @@ namespace ISM6225_Spring_2024_Assignment_2
         nums is sorted in non-decreasing order.
         */
 
-        public static int RemoveDuplicates(int[] nums)
-         {
-          try
-            {
+       public static int RemoveDuplicates(int[] nums)
+{
+    try
+    {
+        // Check if the array is empty or null
         if (nums == null || nums.Length == 0)
             return 0;
 
-        int uniqueIndex = 1;
-        int nextUniqueIndex = 1;
+        // Initialize pointers for unique elements
+        int uniqueIndex = 1; // 
+        int nextUniqueIndex = 1; // 
+
         
         for (int currentIndex = 1; currentIndex < nums.Length; currentIndex++)
         {
+            // If the current element is different from the previous element
             if (nums[currentIndex] != nums[currentIndex - 1])
             {
+                // Copy the current element to the next available position for a unique element
                 nums[nextUniqueIndex] = nums[currentIndex];
+                // Move the pointer to the next available position
                 nextUniqueIndex++;
+                // Increment the count of unique elements
                 uniqueIndex++;
             }
         }
 
+        // Return the count of unique elements
         return uniqueIndex;
     }
     catch (Exception)
     {
+        // If an exception occurs, rethrow it
         throw;
     }
 }
+
 
 
         /*
@@ -284,30 +294,37 @@ namespace ISM6225_Spring_2024_Assignment_2
 
         */
 
-       public static int FindMaxConsecutiveOnes(int[] nums)
+      public static int FindMaxConsecutiveOnes(int[] nums)
 {
     try
     {
-        int maxConsecutiveOnes = 0;
+        int maxConsecutiveOnes = 0; // 
         int currentConsecutiveOnes = 0;
 
+   
         foreach (int num in nums)
         {
+            // If the current number is 1
             if (num == 1)
             {
+                // Increment the count of consecutive ones
                 currentConsecutiveOnes++;
+                // Update the maximum consecutive ones if needed
                 maxConsecutiveOnes = Math.Max(maxConsecutiveOnes, currentConsecutiveOnes);
             }
-            else
+            else // If the current number is not 1 (i.e., 0)
             {
+                // Reset the count of consecutive ones
                 currentConsecutiveOnes = 0;
             }
         }
 
+       
         return maxConsecutiveOnes;
     }
     catch (Exception)
     {
+        // If an exception occurs, rethrow it
         throw;
     }
 }
@@ -340,24 +357,33 @@ public static int BinaryToDecimal(int binary)
 {
     try
     {
-        int decimalNumber = 0;
-        int position = 0;
+       
+        int decimalNumber = 0; 
+        int position = 0; 
 
+        // Convert binary to decimal
         while (binary > 0)
         {
+            // Extract the rightmost digit of the binary number
             int digit = binary % 10;
+            // Remove the rightmost digit from the binary number
             binary /= 10;
+            // Convert the binary digit to decimal and add it to the result
             decimalNumber += digit * (int)Math.Pow(2, position);
+            
             position++;
         }
 
+        // Return the decimal equivalent of the binary number
         return decimalNumber;
     }
     catch (Exception)
     {
+       
         throw;
     }
 }
+
 
         /*
 
@@ -390,14 +416,14 @@ public static int BinaryToDecimal(int binary)
             {
         if (nums.Length < 2)
             return 0;
-
+        //sorting array
         Array.Sort(nums);
         int maxDifference = 0;
         for (int i = 1; i < nums.Length; i++)
         {
-            maxDifference = Math.Max(maxDifference, nums[i] - nums[i - 1]);
+            maxDifference = Math.Max(maxDifference, nums[i] - nums[i - 1]);//calculate max difference
         }
-
+ //return max difference
         return maxDifference;
             }
             catch (Exception)
@@ -437,6 +463,8 @@ public static int BinaryToDecimal(int binary)
         {
             try
             {
+
+                //sorting array
         Array.Sort(nums);
         
         for (int i = nums.Length - 3; i >= 0; i--)
@@ -501,7 +529,7 @@ public static int BinaryToDecimal(int binary)
     int index;
     while ((index = s.IndexOf(part)) != -1)
     {
-        s = s.Remove(index, part.Length);
+        s = s.Remove(index, part.Length);//remove part of string
     }
     return s;
             }

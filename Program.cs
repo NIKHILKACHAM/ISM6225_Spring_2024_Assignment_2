@@ -357,9 +357,8 @@ public static int BinaryToDecimal(int binary)
 {
     try
     {
-       
-        int decimalNumber = 0; 
-        int position = 0; 
+        int decimalNum = 0; // The resulting decimal number
+        int multiplier = 1; // This will be used to multiply with each digit
 
         // Convert binary to decimal
         while (binary > 0)
@@ -369,17 +368,16 @@ public static int BinaryToDecimal(int binary)
             // Remove the rightmost digit from the binary number
             binary /= 10;
             // Convert the binary digit to decimal and add it to the result
-            decimalNumber += digit * (int)Math.Pow(2, position);
-            
-            position++;
+            decimalNum += digit * multiplier;
+            // Increment the multiplier by multiplying by 2
+            multiplier *= 2;
         }
 
         // Return the decimal equivalent of the binary number
-        return decimalNumber;
+        return decimalNum;
     }
     catch (Exception)
     {
-       
         throw;
     }
 }

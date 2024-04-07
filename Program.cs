@@ -283,33 +283,33 @@ namespace ISM6225_Spring_2024_Assignment_2
 
         */
 
-      public static int FindMaxConsecutiveOnes(int[] nums)
+     public static int FindMaxConsecutiveOnes(int[] nums)
 {
     try
     {
-        int maxConsecutiveOnes = 0; // 
-        int currentConsecutiveOnes = 0;
+        int maxOnes = 0; // Maximum consecutive ones
+        int currentOnes = 0; // Current consecutive ones
 
-   
-        foreach (int num in nums)
+        // Iterate through the array
+        foreach (int n in nums)
         {
             // If the current number is 1
-            if (num == 1)
+            if (n == 1)
             {
                 // Increment the count of consecutive ones
-                currentConsecutiveOnes++;
+                currentOnes++;
                 // Update the maximum consecutive ones if needed
-                maxConsecutiveOnes = Math.Max(maxConsecutiveOnes, currentConsecutiveOnes);
+                maxOnes = Math.Max(maxOnes, currentOnes);
             }
             else // If the current number is not 1 (i.e., 0)
             {
                 // Reset the count of consecutive ones
-                currentConsecutiveOnes = 0;
+                currentOnes = 0;
             }
         }
 
-       
-        return maxConsecutiveOnes;
+        // Return the maximum consecutive ones
+        return maxOnes;
     }
     catch (Exception)
     {

@@ -90,41 +90,30 @@ namespace ISM6225_Spring_2024_Assignment_2
         nums is sorted in non-decreasing order.
         */
 
-       public static int RemoveDuplicates(int[] nums)
+            public static int RemoveDuplicates(int[] nums)
 {
-    try
+    // Check if the array is empty
+    if (nums.Length == 0)
+        return 0;
+
+    // Initialize the pointer for unique elements
+    int k = 0;
+
+    // Iterate through the array starting from the second element
+    for (int i = 1; i < nums.Length; i++)
     {
-        // Check if the array is empty or null
-        if (nums == null || nums.Length == 0)
-            return 0;
-
-        // Initialize pointers for unique elements
-        int uniqueIndex = 1; // 
-        int nextUniqueIndex = 1; // 
-
-        
-        for (int currentIndex = 1; currentIndex < nums.Length; currentIndex++)
+        // If the current element is different from the previous one
+        if (nums[i] != nums[k])
         {
-            // If the current element is different from the previous element
-            if (nums[currentIndex] != nums[currentIndex - 1])
-            {
-                // Copy the current element to the next available position for a unique element
-                nums[nextUniqueIndex] = nums[currentIndex];
-                // Move the pointer to the next available position
-                nextUniqueIndex++;
-                // Increment the count of unique elements
-                uniqueIndex++;
-            }
+            // Move the unique element pointer forward
+            k++;
+            // Copy the current element to the next position for a unique element
+            nums[k] = nums[i];
         }
+    }
 
-        // Return the count of unique elements
-        return uniqueIndex;
-    }
-    catch (Exception)
-    {
-        // If an exception occurs, rethrow it
-        throw;
-    }
+    // Return k, which represents the count of unique elements
+    return k + 1;
 }
 
 

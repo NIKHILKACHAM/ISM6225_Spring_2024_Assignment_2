@@ -510,21 +510,25 @@ public static int BinaryToDecimal(int binary)
         */
 
         public static string RemoveOccurrences(string s, string part)
-        {
-            try
-            {
-    int index;
-    while ((index = s.IndexOf(part)) != -1)
+{
+    try
     {
-        s = s.Remove(index, part.Length);//remove part of string
-    }
-    return s;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+        int index; // Variable to store the index of the leftmost occurrence of part
+        // Repeat until no more occurrences of part are found
+        while ((index = s.IndexOf(part)) != -1)
+        {
+            // If part is found, remove it
+            // Remove part from s using Remove method
+            s = s.Remove(index, part.Length); 
         }
+        // Return the modified string s after all occurrences of part are removed
+        return s;
+    }
+    catch (Exception)
+    {
+        throw;
+    }
+}
 
         /* Inbuilt Functions - Don't Change the below functions */
         static string ConvertIListToNestedList(IList<IList<int>> input)
